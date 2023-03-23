@@ -19,10 +19,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_mes_input"
-            android:layout_width="227dp"
+            android:layout_width="fill_parent"
             android:layout_height="66dp"
+            android:layout_marginEnd="130dp"
             android:ems="10"
             android:hint="MESSENGER"
             android:inputType="textPersonName"
@@ -46,12 +47,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecycleView_mes"
-        android:layout_width="407dp"
-        android:layout_height="700dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="110dp"
+        android:paddingTop="5dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
