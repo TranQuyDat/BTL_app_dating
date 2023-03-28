@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
     @NonNull
     @Override
     public chat_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //check sender để chon itemchat
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_mes_you,parent,false);
         return new chat_viewholder(view);
     }
@@ -34,6 +36,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
         holder.txt_mes.setText(mes.getMestxt());
         holder.sender.setText(mes.getSender());
         holder.time.setText(mes.getTime().toString());
+        holder.avt_mes_View.setImageResource(mes.getAvt_mes_Id());
     }
 
     @Override
@@ -48,11 +51,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
         private TextView sender;
         private TextView txt_mes;
         private TextView time;
+
+        private ImageView avt_mes_View;
         public chat_viewholder(@NonNull View itemView) {
             super(itemView);
             sender = itemView.findViewById(R.id.sender);
             txt_mes =itemView.findViewById(R.id.txt_mes_view);
             time = itemView.findViewById(R.id.time_mes);
+            avt_mes_View = itemView.findViewById(R.id.avt_mes);
         }
     }
 

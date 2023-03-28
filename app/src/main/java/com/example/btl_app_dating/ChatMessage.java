@@ -5,10 +5,16 @@ public class ChatMessage {
     private String mestxt;
     private String time;
 
-    public ChatMessage(String sender,String mestxt,String time){
+    private int avt_mes_Id;
+
+    public ChatMessage() {
+    }
+
+    public ChatMessage(int avt_mes_Id , String sender, String mestxt, String time){
         this.sender=sender;
         this.mestxt=mestxt;
         this.time=time;
+        this.avt_mes_Id =avt_mes_Id;
     }
     public String getSender(){
         return sender;
@@ -19,6 +25,14 @@ public class ChatMessage {
 
     public String getTime() {
         return time;
+    }
+
+    public int getAvt_mes_Id() {
+        return avt_mes_Id;
+    }
+
+    public void setAvt_mes_Id(int avt_mes_Id) {
+        this.avt_mes_Id = avt_mes_Id;
     }
 
     public void setSender(String sender){
