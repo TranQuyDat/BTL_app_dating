@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.btl_app_dating">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"  />
 
     <application
         android:allowBackup="true"
@@ -12,8 +14,10 @@
         android:theme="@style/Theme.BTL_app_dating"
         tools:targetApi="31">
         <activity
-            android:name=""
+            android:name=".chatActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
