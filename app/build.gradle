@@ -6,22 +6,19 @@ plugins {
 android {
     signingConfigs {
 
-        debug {
-            storeFile file('C:\\62TH-VA\\androi\\kyeconfig.jks')
-        }
         tranquydat {
             storeFile file('C:\\62TH-VA\\androi\\kyeconfig.jks')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'tranquydat'
-
+        }
         phanthaiduong {
             storeFile file('D:\\Android\\keyconfig.jks')
             storePassword '123456'
             keyPassword '123456'
             keyAlias 'phanthaiduong'
         }
-    }
+
     namespace 'com.example.btl_app_dating'
     compileSdk 33
 
@@ -34,7 +31,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.tranquydat
-        
 
     }
 
