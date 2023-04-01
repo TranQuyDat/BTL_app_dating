@@ -3,22 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bg_login_singup"
+
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="288dp"
-        android:layout_height="499dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/rect_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.443">
+        app:layout_constraintVertical_bias="0.43"
+        >
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -31,19 +33,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/loginNow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:text="Login Now"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_signUp" />
-
 
         <Button
             android:id="@+id/btn_signUp"
@@ -52,32 +57,25 @@
             android:layout_marginTop="16dp"
 
             android:background="@drawable/shape_btn_login"
-            android:backgroundTint="#ED6666"
-            android:backgroundTintMode="multiply"
+            android:backgroundTint="@color/orange"
             android:text="Sign Up"
-            app:iconTint="#B14444"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/input_Re_pass_signup"
             app:layout_constraintStart_toStartOf="@+id/input_Re_pass_signup"
-            app:layout_constraintTop_toBottomOf="@+id/input_Re_pass_signup"
-            app:layout_constraintVertical_bias="0.189"
-            app:rippleColor="#BF3D3D"
-            app:strokeColor="#C65757"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/input_Re_pass_signup" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="101dp"
             android:layout_height="42dp"
+            android:layout_marginTop="28dp"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="Sign Up"
             android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_usernametxt_signup"
@@ -111,8 +109,8 @@
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:hint="password"
-            android:textSize="18dp"
             android:inputType="textPassword"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/input_email_signup"
             app:layout_constraintStart_toStartOf="@+id/input_email_signup"
             app:layout_constraintTop_toBottomOf="@+id/input_email_signup" />
@@ -124,8 +122,8 @@
             android:layout_marginTop="16dp"
             android:gravity="center_vertical"
             android:hint="re_password"
-            android:textSize="18dp"
             android:inputType="textPassword"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="@+id/input_pass_signup"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/input_pass_signup"

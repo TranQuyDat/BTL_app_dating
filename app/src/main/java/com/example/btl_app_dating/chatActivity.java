@@ -42,7 +42,7 @@ public class chatActivity extends AppCompatActivity {
     private RecyclerView rcv_chatbox;
     private Button sendButton;
 
-    private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("messdemo");
+    private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
     private Timestamp time = new Timestamp(System.currentTimeMillis());
     private List<ChatMessage> list_chatobj = new ArrayList<>();
     private ChatAdapter adapter;
