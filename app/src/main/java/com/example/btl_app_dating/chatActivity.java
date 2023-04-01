@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,13 +46,12 @@ public class chatActivity extends AppCompatActivity {
     private Timestamp time = new Timestamp(System.currentTimeMillis());
     private List<ChatMessage> list_chatobj = new ArrayList<>();
     private ChatAdapter adapter;
+    private long id =0;
 
-    private int id =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbox);
-
         rcv_chatbox = findViewById(R.id.RecycleView_mes);
         LinearLayoutManager lnm = new LinearLayoutManager(this);
         rcv_chatbox.setLayoutManager(lnm);
@@ -98,9 +98,9 @@ public class chatActivity extends AppCompatActivity {
     private void update_chat(EditText input_text){
         String mes = input_text.getText().toString();
         if (mes.isEmpty()) return;
-        ChatMessage chat = new ChatMessage(R.drawable.avatar1,"me",mes,time.toString());
-        String ids = String.valueOf(id+=1);
-        db_messenger.child(ids).setValue(chat);
+        ChatMessage chat = new ChatMessage("senderId1",R.drawable.avatar1,"me",mes,time.toString());
+        String id_mes = String.valueOf(id);
+        db_messenger.child("conv_0").child("mes_"+id_mes).setValue(chat);
         list_chatobj.add(chat);
         adapter.notifyItemChanged(list_chatobj.size()-1);
         input_text.getText().clear();
@@ -108,8 +108,8 @@ public class chatActivity extends AppCompatActivity {
     }
 
     private void getdata_firebase(){
-
-        db_messenger.addValueEventListener(new ValueEventListener() {
+        autoid();
+        db_messenger.child("conv_0").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list_chatobj.clear();
@@ -127,5 +127,24 @@ public class chatActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private int autoid(){
+        db_messenger.child("conv_0").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getChildrenCount()!=0){
+                    id = snapshot.getChildrenCount();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return (int) id;
     }
 }

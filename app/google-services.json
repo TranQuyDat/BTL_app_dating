@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "546504320080",
+    "firebase_url": "https://btlappdating-default-rtdb.firebaseio.com",
     "project_id": "btlappdating",
     "storage_bucket": "btlappdating.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:546504320080:android:3fd168817f00250f5d5d55",
+        "mobilesdk_app_id": "1:546504320080:android:71be3c443f30dccc5d5d55",
         "android_client_info": {
           "package_name": "com.example.btl_app_dating"
         }
