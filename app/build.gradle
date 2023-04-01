@@ -11,6 +11,12 @@ android {
             keyPassword '123456'
             keyAlias 'phanthaiduong'
         }
+        tranquydat {
+            storeFile file('D:\\Android\\keyconfig_tranquydat.jks')
+            storePassword '123456'
+            keyPassword '123456'
+            keyAlias 'tranquydat'
+        }
     }
     namespace 'com.example.btl_app_dating'
     compileSdk 33
@@ -23,7 +29,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.phanthaiduong
+        signingConfig signingConfigs.tranquydat
     }
 
     buildTypes {
