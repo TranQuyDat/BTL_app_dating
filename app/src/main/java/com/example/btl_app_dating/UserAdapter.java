@@ -41,8 +41,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             return;
         }
 
-        holder.imgUser.setImageResource(user.getResourceID());
-        holder.tvName.setText(user.getName());
+        holder.imgUser.setImageResource(user.getresourceID());
+        holder.tvName.setText(user.getname());
     }
 
     @SuppressLint("SuspiciousIndentation")
