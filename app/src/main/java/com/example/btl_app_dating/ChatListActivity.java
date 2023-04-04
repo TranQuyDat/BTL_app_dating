@@ -3,6 +3,8 @@ package com.example.btl_app_dating;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,8 @@ public class ChatListActivity extends AppCompatActivity {
 
     private RecyclerView rcvUser;
     private UserAdapter userAdapter;
+
+    private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,18 +35,8 @@ public class ChatListActivity extends AppCompatActivity {
         userAdapter= new UserAdapter(this);
 
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        rcvUser.setLayoutManager(linearLayoutManager);
 
-        userAdapter.setData(getListUser());
-        rcvUser.setAdapter(userAdapter);
     }
 
-    private List<User> getListUser(){
-        List<User> list = new ArrayList<>();
-        list.add(new User(R.drawable.img_avatar_1, "User name 1"));
-        list.add(new User(R.drawable.img_avata_2, "User name 2"));
-        list.add(new User(R.drawable.img_avata_3, "User name 3"));
-        list.add(new User(R.drawable.img_avata_4, "User name 4"));
-        return  list;
-    }
+
 }
