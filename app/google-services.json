@@ -1,18 +1,35 @@
 {
   "project_info": {
     "project_number": "546504320080",
+    "firebase_url": "https://btlappdating-default-rtdb.firebaseio.com",
     "project_id": "btlappdating",
     "storage_bucket": "btlappdating.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:546504320080:android:3fd168817f00250f5d5d55",
+        "mobilesdk_app_id": "1:546504320080:android:71be3c443f30dccc5d5d55",
         "android_client_info": {
           "package_name": "com.example.btl_app_dating"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "546504320080-48f2d27dhf0v3ouqgh161mo20hsog05m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.btl_app_dating",
+            "certificate_hash": "e1725ffa6dd4b63e04b704b45f69ed656556c613"
+          }
+        },
+        {
+          "client_id": "546504320080-cdr8ivsb1pvbobthqmemsfvh3bf5qevr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.btl_app_dating",
+            "certificate_hash": "d61c5dc75bed58130119a69c7d21ecac4f718bad"
+          }
+        },
         {
           "client_id": "546504320080-hentsecjmkcoe69eum1rt1j96hvj2n1n.apps.googleusercontent.com",
           "client_type": 1,

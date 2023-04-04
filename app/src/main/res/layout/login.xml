@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_login_singup"
+    android:scrollbars="vertical"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_login"
+        android:maxWidth="295dp"
+        android:maxHeight="415dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="120dp"
+            android:layout_height="55dp"
+            android:background="@drawable/shape_btn_login"
+
+            android:backgroundTint="#ED6666"
+            android:backgroundTintMode="multiply"
+            android:text="Login"
+            app:iconTint="#B14444"
+            app:layout_constraintEnd_toEndOf="@+id/input_pass"
+            app:layout_constraintStart_toStartOf="@+id/input_pass"
+            app:layout_constraintTop_toBottomOf="@+id/input_pass"
+            app:rippleColor="#BF3D3D"
+            app:strokeColor="#C65757" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="101dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="Login"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_email"
+            android:layout_width="211dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="36dp"
+            android:hint="username"
+            android:inputType="textEmailAddress"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_pass"
+            android:layout_width="210dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center_vertical"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/input_email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/input_email"
+            app:layout_constraintTop_toBottomOf="@+id/input_email" />
+
+        <TextView
+            android:id="@+id/signupNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:gravity="center"
+            android:text="Don't have an account? Sign up."
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_login"
+            app:layout_constraintStart_toStartOf="@+id/btn_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            tools:ignore="TextSizeCheck" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

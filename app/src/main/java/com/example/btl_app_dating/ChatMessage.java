@@ -4,13 +4,14 @@ public class ChatMessage {
     private String sender;
     private String mestxt;
     private String time;
-
+    private String sender_id;
     private int avt_mes_Id;
 
     public ChatMessage() {
     }
 
-    public ChatMessage(int avt_mes_Id , String sender, String mestxt, String time){
+    public ChatMessage(String sender_id,int avt_mes_Id , String sender, String mestxt, String time){
+        this.sender_id =sender_id;
         this.sender=sender;
         this.mestxt=mestxt;
         this.time=time;
@@ -29,6 +30,14 @@ public class ChatMessage {
 
     public int getAvt_mes_Id() {
         return avt_mes_Id;
+    }
+
+    public String getSender_id() {
+        return this.sender_id;
+    }
+
+    public void setSender_id(String sender_id) {
+        this.sender_id = sender_id;
     }
 
     public void setAvt_mes_Id(int avt_mes_Id) {

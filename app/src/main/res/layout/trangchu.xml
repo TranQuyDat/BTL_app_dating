@@ -1,127 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_view"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_view">
 
-    <ImageButton
-        android:id="@+id/profile_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/user"
-        android:contentDescription="profile"
-        app:layout_constraintBottom_toTopOf="@+id/layout_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_view"
+    <RelativeLayout
+        android:id="@+id/layout_top"
         android:layout_width="fill_parent"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-        <TextView
-            android:id="@+id/txt_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/img_avt"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/img_avt"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="fill_parent"
-        android:layout_height="84dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_chat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/rect_view"
-            tools:visibility="visible" />
+        android:layout_height="wrap_content"
+        >
 
         <ImageButton
-            android:id="@+id/btn_chat"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/speech_bubble"
-            android:visibility="visible"
-            android:contentDescription="chat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            android:layout_alignParentRight="true"
+            android:id="@+id/btn_prf"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/user" />
+
+    </RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/layout_top"
+    >
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_viewpage_main"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="15dp"
+        android:background="@drawable/card_layout" />
+</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_btn_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+       >
 
         <ImageButton
             android:id="@+id/btn_heart"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="60dp"
-            android:background="@drawable/heart_red"
-            android:contentDescription="heart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_chat" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/btn_chat"
+            android:background="@drawable/heart_red" />
+
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="90dp"
+            android:background="@drawable/speech_bubble" />
 
         <ImageButton
             android:id="@+id/btn_delete"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="60dp"
-            android:background="@drawable/clear"
-            android:contentDescription="delete"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_chat" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@id/btn_chat"
+            android:background="@drawable/clear" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</RelativeLayout>

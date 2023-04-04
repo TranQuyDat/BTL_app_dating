@@ -1,6 +1,7 @@
 package com.example.btl_app_dating;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     private List<ChatMessage> messages;
 
+    private  int mes_right=1;
+    private int mes_left=0;
     public ChatAdapter(List<ChatMessage> messages) {
         this.messages = messages;
     }
@@ -24,8 +27,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
     @NonNull
     @Override
     public chat_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //check sender để chon itemchat
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_mes_you,parent,false);
+        int item_mes =0;
+        if(viewType == mes_left){
+            item_mes = R.layout.item_chat_mes_friend;
+        }
+        else{
+            item_mes = R.layout.item_chat_mes_you;
+        }
+        View view = LayoutInflater.from(parent.getContext()).inflate( item_mes,parent,false);
         return new chat_viewholder(view);
     }
 
@@ -60,7 +69,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
             time = itemView.findViewById(R.id.time_mes);
             avt_mes_View = itemView.findViewById(R.id.avt_mes);
         }
+
+
     }
 
-
+    @Override
+    public int getItemViewType(int position) {
+        if(messages.get(position).getSender_id().equalsIgnoreCase("senderId1")){
+            return mes_right;
+        }
+        else{
+            return  mes_left;
+        }
+    }
 }
