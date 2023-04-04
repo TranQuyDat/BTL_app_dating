@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -36,16 +37,13 @@ public class viewpageAdapter extends RecyclerView.Adapter<viewpageAdapter.viewho
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
        Viewpage viewpage = view_list.get(position);
-//        Log.d("uribirth:",  String.valueOf(viewpage.getbirth()));
-//        Log.d("urigender:",  String.valueOf(viewpage.getgender()));
-//        Log.d("urirel:",  String.valueOf(viewpage.getrelationship()));
-//        Log.d("uriword:",  String.valueOf(viewpage.getword()));
-//        Log.d("uriimg:",  String.valueOf(viewpage.getimg_view()));
+
         if(viewpage == null) return;
         Picasso picasso = Picasso.get();
         picasso.load(viewpage.getimg_view()).error(R.drawable.avatar1).fit().into(holder.img_view);
         holder.txt_username.setText(viewpage.getname());
         holder.avt_user.setImageResource(viewpage.getresourceID());
+        holder.cardView.setTag(viewpage.getidu());
     }
 
 
@@ -62,8 +60,11 @@ public class viewpageAdapter extends RecyclerView.Adapter<viewpageAdapter.viewho
         private ImageView img_view;
         private ImageView avt_user;
         private TextView txt_username;
+
+        private CardView cardView;
         public viewholder(@NonNull View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.cardView);
             img_view = itemView.findViewById(R.id.img_view);
             avt_user = itemView.findViewById(R.id.avt_user);
             txt_username = itemView.findViewById(R.id.txt_username);
