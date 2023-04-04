@@ -57,7 +57,6 @@ public class chatActivity extends AppCompatActivity {
         rcv_chatbox.setLayoutManager(lnm);
         sendButton = findViewById(R.id.btn_send);
         EditText inputtxt = findViewById(R.id.txt_mes_input);
-
         adapter = new ChatAdapter(list_chatobj);
         rcv_chatbox.setAdapter(adapter);
         if(list_chatobj.size()<=0)
