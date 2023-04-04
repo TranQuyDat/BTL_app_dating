@@ -40,7 +40,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     @Override
     public void onBindViewHolder(@NonNull chat_viewholder holder, int position) {
-        Log.d("sender_id: ",messages.get(position).getSender_id());
         ChatMessage mes = messages.get(position);
         if(mes ==null) return;
         holder.txt_mes.setText(mes.getMestxt());
@@ -70,12 +69,13 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
             time = itemView.findViewById(R.id.time_mes);
             avt_mes_View = itemView.findViewById(R.id.avt_mes);
         }
+
+
     }
 
     @Override
     public int getItemViewType(int position) {
         if(messages.get(position).getSender_id().equalsIgnoreCase("senderId1")){
-            Log.d("sender_id: ",messages.get(position).getSender_id());
             return mes_right;
         }
         else{
