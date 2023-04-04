@@ -9,6 +9,7 @@ public class User {
     private String word;
     private String gender;
 
+    private String idu;
     public User() {
     }
 
@@ -81,5 +82,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getidu() {
+        return idu;
+    }
+
+    public void setIdu(String idu) {
+        this.idu = idu;
     }
 }

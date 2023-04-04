@@ -86,6 +86,7 @@ public class loginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), trangchuActivity.class);
+                                    intent.putExtra("uid",task.getResult().getUser().getUid());
                                     startActivity(intent);
                                     finish();
                                 } else {
