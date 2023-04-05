@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg_view">
 
+
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="fill_parent"

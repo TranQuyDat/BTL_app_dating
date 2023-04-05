@@ -43,6 +43,7 @@ public class chatActivity extends AppCompatActivity {
     private Button sendButton;
 
     private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
+
     public Timestamp time = new Timestamp(System.currentTimeMillis());
     private List<ChatMessage> list_chatobj = new ArrayList<>();
     private ChatAdapter adapter;

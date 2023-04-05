@@ -43,6 +43,7 @@ public class viewpageAdapter extends RecyclerView.Adapter<viewpageAdapter.viewho
         picasso.load(viewpage.getimg_view()).error(R.drawable.avatar1).fit().into(holder.img_view);
         holder.txt_username.setText(viewpage.getname());
         holder.avt_user.setImageResource(viewpage.getresourceID());
+
         holder.cardView.setTag(viewpage.getidu());
     }
 
