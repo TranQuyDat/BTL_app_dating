@@ -4,6 +4,7 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg_view">
 
+
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="fill_parent"
@@ -17,13 +18,21 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@drawable/user" />
+        <ImageButton
+            android:id="@+id/btn_chat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/speech_bubble" />
 
     </RelativeLayout>
 
 <RelativeLayout
+    android:id="@+id/laout_viewmain"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_below="@id/layout_top"
+    android:layout_above="@+id/layout_btn_icon"
     >
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/card_viewpage_main"
@@ -43,23 +52,11 @@
             android:id="@+id/btn_heart"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_toRightOf="@id/btn_chat"
+            android:layout_marginBottom="5dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/heart_red" />
 
-        <ImageButton
-            android:id="@+id/btn_chat"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="90dp"
-            android:background="@drawable/speech_bubble" />
 
-        <ImageButton
-            android:id="@+id/btn_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_toLeftOf="@id/btn_chat"
-            android:background="@drawable/clear" />
 
     </RelativeLayout>
 </RelativeLayout>
