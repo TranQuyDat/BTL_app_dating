@@ -56,15 +56,16 @@ public class trangchuActivity extends AppCompatActivity {
         CardStackLayoutManager cardStackLayoutManager = new CardStackLayoutManager(this);
         cardStackLayoutManager.setCanScrollVertical(false);
         card_view.setLayoutManager(cardStackLayoutManager);
-        get_data();
-        //getiduser top card
-        if(cardStackLayoutManager.getTopPosition()==list_viewpage.size()) return;
-        useridtopcard = list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
-
-
         card_view.setAdapter(adapter);
+        if (list_viewpage.size()<=0)
+            get_data();
+        //getiduser top card
+        useridtopcard = getiduTopcard(cardStackLayoutManager);
+
         ImageButton btn_chat = findViewById(R.id.btn_chat);
         ImageButton btn_heart = findViewById(R.id.btn_heart);
+
+
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +77,8 @@ public class trangchuActivity extends AppCompatActivity {
         btn_heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                get_data();
+                Log.d("",String.valueOf(list_viewpage.size()));
                 checkischat(uid,useridtopcard);
                 if (ischat == true) return;
                  db_user.child(useridtopcard).addValueEventListener(new ValueEventListener() {
@@ -97,6 +100,7 @@ public class trangchuActivity extends AppCompatActivity {
         db_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("",String.valueOf(snapshot.getChildrenCount()));
                 list_viewpage.clear();
                 if(snapshot.getChildrenCount()<=0) return;
                 Log.d("","trueaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -113,7 +117,7 @@ public class trangchuActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("error",error.getMessage());
             }
         });
     }
@@ -154,6 +158,10 @@ private void checkischat(String uid1,String uid2){
 
             }
         });
+}
+private String getiduTopcard(CardStackLayoutManager cardStackLayoutManager){
+    if(cardStackLayoutManager.getTopPosition()==list_viewpage.size()) return "";
+    return list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
 }
 
 }
