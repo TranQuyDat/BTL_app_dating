@@ -8,6 +8,9 @@ public class conversation {
     private String userid2;
     private int img_receiver;
 
+    public conversation() {
+    }
+
     public conversation(String last_message_timestamp, String last_message, String name_receiver, String userid1, String userid2, int img_receiver) {
         this.last_message_timestamp = last_message_timestamp;
         this.last_message = last_message;

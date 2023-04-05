@@ -149,7 +149,7 @@ public class signupActivity extends AppCompatActivity {
     private void update_users(User user, String uid ){
 
         db_user.child(uid).setValue(user);
-        db_user.child(uid).child("img_view").setValue(R.drawable.avatar1);
+        db_user.child(uid).child("img_view").setValue("");
     }
 
 }

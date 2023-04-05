@@ -36,6 +36,7 @@ public class loginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(getApplicationContext(), trangchuActivity.class);
+            intent.putExtra("key_userId",String.valueOf(currentUser.getUid()));
             startActivity(intent);
             finish();
         }
@@ -84,9 +85,10 @@ public class loginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(view.GONE);
                                 if (task.isSuccessful()) {
+                                    Log.d("debug:",String.valueOf(task.getResult().getUser().getUid()));
                                     Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), trangchuActivity.class);
-                                    intent.putExtra("uid",task.getResult().getUser().getUid());
+                                    intent.putExtra("key_userId",String.valueOf(task.getResult().getUser().getUid()));
                                     startActivity(intent);
                                     finish();
                                 } else {

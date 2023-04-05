@@ -20,8 +20,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     private  int mes_right=1;
     private int mes_left=0;
-    public ChatAdapter(List<ChatMessage> messages) {
+
+    private String uid;
+    public ChatAdapter(List<ChatMessage> messages,String uid) {
+
         this.messages = messages;
+        this.uid = uid;
     }
 
     @NonNull
@@ -75,7 +79,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     @Override
     public int getItemViewType(int position) {
-        if(messages.get(position).getSender_id().equalsIgnoreCase("senderId1")){
+        if(messages.get(position).getSender_id().equalsIgnoreCase(uid)){
             return mes_right;
         }
         else{

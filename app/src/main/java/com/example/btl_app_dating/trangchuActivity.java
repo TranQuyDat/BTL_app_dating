@@ -42,17 +42,18 @@ public class trangchuActivity extends AppCompatActivity {
     private List<Viewpage> list_viewpage = new ArrayList<>();
     private viewpageAdapter adapter;
     private int id =0;
-    private Intent intent ;
-    private String uid ;
-    private String useridtopcard;
-    private boolean ischat;
+    private String uid="";
+    private String useridtopcard="";
+    private boolean ischat = true ;
+
+    private String new_conv="";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trangchu);
+        uid = getIntent().getStringExtra("key_userId");
 
-        intent = getIntent();
-        uid = intent.getStringExtra("uid");
+
 
         CardStackView card_view = findViewById(R.id.card_viewpage_main);
         adapter = new viewpageAdapter(list_viewpage);
@@ -62,13 +63,21 @@ public class trangchuActivity extends AppCompatActivity {
         card_view.setAdapter(adapter);
         if (list_viewpage.size()<=0)
             get_data();
-        //getiduser top card
-        useridtopcard = getiduTopcard(cardStackLayoutManager);
+
 
         ImageButton btn_chat = findViewById(R.id.btn_chat);
         ImageButton btn_heart = findViewById(R.id.btn_heart);
+        ImageButton btn_prf = findViewById(R.id.btn_prf);
 
+//btn_prf
+        btn_prf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("debug: ",String.valueOf(uid));
+            }
+        });
 
+//btn_chat
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,23 +86,21 @@ public class trangchuActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+//btn_heart
         btn_heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                get_data();
-                Log.d("",String.valueOf(list_viewpage.size()));
+                useridtopcard = list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
                 checkischat(uid,useridtopcard);
-                if (ischat == true) return;
-                 db_user.child(useridtopcard).addValueEventListener(new ValueEventListener() {
-                     @Override
-                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                         User user = snapshot.getValue(User.class);
-                          String  name_receive = user.getname();
-                          int avt_user = user.getresourceID();
-                         updatedataconv_new(name_receive,useridtopcard,uid,avt_user);
-                     }@Override public void onCancelled(@NonNull DatabaseError error) { }
-                 });
+                if (ischat) return;
+                    updatedataconv_new();
+                    Intent intent = new Intent(getApplicationContext(),chatActivity.class);
+                    intent.putExtra("Key_conv",new_conv);
+                    startActivity(intent);
+                    finish();
+                    Log.d("debug: ",String.valueOf(ischat));
+
+
 
             }
         });
@@ -104,21 +111,16 @@ public class trangchuActivity extends AppCompatActivity {
         db_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("",String.valueOf(snapshot.getChildrenCount()));
                 list_viewpage.clear();
                 if(snapshot.getChildrenCount()<=0) return;
-                Log.d("","trueaaaaaaaaaaaaaaaaaaaaaaaaa");
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     Viewpage viewpage = dataSnapshot.getValue(Viewpage.class);
                     viewpage.setIdu(dataSnapshot.getKey());
-//                    if(uid != useridtopcard)
+                    if(!uid.equalsIgnoreCase(viewpage.getidu()))
                         list_viewpage.add(viewpage);
                 }
-
                 adapter.notifyItemChanged(list_viewpage.size()-1);
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("error",error.getMessage());
@@ -126,9 +128,20 @@ public class trangchuActivity extends AppCompatActivity {
         });
     }
 
-    private void updatedataconv_new(String name_receiver,String userid1,String userid2,int avt_receive){
-        conversation conversation = new conversation("","",name_receiver,userid1,userid2,avt_receive);
-        db_conv.child("conv"+id).setValue(conversation);
+    private void updatedataconv_new(){
+        autoid();
+        db_user.child(useridtopcard).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+                String  name_receive = user.getname();
+                int avt_receive = user.getresourceID();
+                conversation conversation = new conversation("","",name_receive,useridtopcard,uid,avt_receive);
+                db_conv.child("conv"+id).setValue(conversation);
+                new_conv = "conv"+id;
+            }@Override public void onCancelled(@NonNull DatabaseError error) { }
+        });
+
     }
 
     private int autoid(){
@@ -144,29 +157,40 @@ public class trangchuActivity extends AppCompatActivity {
         return (int) id;
     }
 
-private void checkischat(String uid1,String uid2){
-        db_conv.addValueEventListener(new ValueEventListener() {
-            boolean ic;
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    conversation con = dataSnapshot.getValue(conversation.class);
-                    if((uid1==con.getuserid1()&&uid2==con.getuserid2())||(uid1==con.getuserid2()&&uid2==con.getuserid1())){
-                        ischat =true;
+    private void checkischat(String uid1,String uid2){
+            db_conv.addValueEventListener(new ValueEventListener() {
+                boolean ic;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getChildrenCount()<=0) {ischat =false; return;}
+                    for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                        conversation con = dataSnapshot.getValue(conversation.class);
+                        if((uid1.equalsIgnoreCase(con.getuserid1())&&uid2.equalsIgnoreCase(con.getuserid2()))
+                                ||(uid1.equalsIgnoreCase(con.getuserid2())&&uid2.equalsIgnoreCase(con.getuserid1()))){
+                            ischat =true;
+                            Intent intent = new Intent(getApplicationContext(),chatActivity.class);
+                            intent.putExtra("Key_conv",dataSnapshot.getKey());
+                            intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
+                            startActivity(intent);
+                            finish();
+                            Log.d("debug: ",String.valueOf(ischat));
+                            return;
+                        }
+                        else {
+                            ischat = false;
+                            Log.d("debug: ",String.valueOf(ischat));
+
+                        }
                     }
-                    else ischat =false;
+
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-}
-private String getiduTopcard(CardStackLayoutManager cardStackLayoutManager){
-    if(cardStackLayoutManager.getTopPosition()==list_viewpage.size()) return "";
-    return list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
-}
+                }
+            });
+    }
+
 
 }
