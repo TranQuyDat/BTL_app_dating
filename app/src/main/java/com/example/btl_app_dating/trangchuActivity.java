@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackView;
+
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.sql.Timestamp;
@@ -35,6 +36,7 @@ public class trangchuActivity extends AppCompatActivity {
 
     private FirebaseStorage storage  = FirebaseStorage.getInstance("gs://btlappdating.appspot.com");
     private DatabaseReference db_user = FirebaseDatabase.getInstance().getReference("users");
+
     private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
     private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
     private List<Viewpage> list_viewpage = new ArrayList<>();
@@ -48,6 +50,7 @@ public class trangchuActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trangchu);
+
         intent = getIntent();
         uid = intent.getStringExtra("uid");
 
@@ -74,6 +77,7 @@ public class trangchuActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         btn_heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +125,7 @@ public class trangchuActivity extends AppCompatActivity {
             }
         });
     }
+
     private void updatedataconv_new(String name_receiver,String userid1,String userid2,int avt_receive){
         conversation conversation = new conversation("","",name_receiver,userid1,userid2,avt_receive);
         db_conv.child("conv"+id).setValue(conversation);
