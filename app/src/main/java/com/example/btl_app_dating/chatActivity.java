@@ -2,10 +2,13 @@ package com.example.btl_app_dating;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
@@ -44,6 +47,7 @@ public class chatActivity extends AppCompatActivity {
 
     private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
     private DatabaseReference db_user = FirebaseDatabase.getInstance().getReference("users");
+    private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
 
     public Timestamp time = new Timestamp(System.currentTimeMillis());
     private List<ChatMessage> list_chatobj = new ArrayList<>();
@@ -51,9 +55,12 @@ public class chatActivity extends AppCompatActivity {
     private long id =0;
 
     private String keyconv="";
-    private boolean checkkeyconv;
+
 
     private int avtid;
+
+
+
     private String name_Sender="";
 
     private String uid ;
@@ -72,12 +79,12 @@ public class chatActivity extends AppCompatActivity {
         EditText inputtxt = findViewById(R.id.txt_mes_input);
         adapter = new ChatAdapter(list_chatobj,uid);
         rcv_chatbox.setAdapter(adapter);
-        checkkeyconv();
-        if(list_chatobj.size()<=0)
+
             getdata_firebase(keyconv);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("debug!!!!!!!!!!!: ",keyconv);
                 autoid();
                 update_chat(inputtxt);
             }
@@ -91,6 +98,16 @@ public class chatActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),ChatListActivity.class);
+        intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        finish();
+    }
+
     private void checkkeyboard(){
         final View actvityrootview = findViewById(R.id.lable_mes);
         actvityrootview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -163,24 +180,9 @@ public class chatActivity extends AppCompatActivity {
         return (int) id;
     }
 
-    private void checkkeyconv(){
-        db_messenger.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    if (dataSnapshot.getKey().equalsIgnoreCase(keyconv)){
-                        checkkeyconv =true;
-                    }
-                    else checkkeyconv =false;
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-    }
+
 
     private void get_name_avt(){
         db_user.child(uid).addValueEventListener(new ValueEventListener() {

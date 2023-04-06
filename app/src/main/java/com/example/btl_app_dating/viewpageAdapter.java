@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ public class viewpageAdapter extends RecyclerView.Adapter<viewpageAdapter.viewho
 
         if(viewpage == null) return;
         Picasso picasso = Picasso.get();
+        if (viewpage.getimg_view().isEmpty()) viewpage.setImg_view("https://firebasestorage.googleapis.com/v0/b/btlappdating.appspot.com/o/t%E1%BA%A3i%20xu%E1%BB%91ng.png?alt=media&token=f803d01c-15c0-4253-8f71-12ce24239d53");
         picasso.load(viewpage.getimg_view()).error(R.drawable.avatar1).fit().into(holder.img_view);
         holder.txt_username.setText(viewpage.getname());
         holder.avt_user.setImageResource(viewpage.getresourceID());
