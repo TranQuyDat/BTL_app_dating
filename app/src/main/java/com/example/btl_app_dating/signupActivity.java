@@ -66,6 +66,7 @@ public class signupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 finish();
             }
         });
@@ -117,6 +118,7 @@ public class signupActivity extends AppCompatActivity {
                                     update_users(user, uid);
                                     Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.

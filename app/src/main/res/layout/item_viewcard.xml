@@ -5,8 +5,9 @@
     android:id="@+id/cardView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    app:cardCornerRadius="30dp"
     android:scrollbars="none"
-
+    app:cardElevation="5dp"
     >
 
     <ImageView
