@@ -18,7 +18,13 @@ android {
             keyPassword '123456'
             keyAlias 'phanthaiduong'
         }
-
+        nguyenminhduc {
+            storeFile file('D:\\Android Studio\\key_config.jks')
+            storePassword '123456'
+            keyAlias '123456'
+            keyPassword '123456'
+        }
+    }
     namespace 'com.example.btl_app_dating'
     compileSdk 33
 
@@ -30,8 +36,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.tranquydat
-
+        signingConfig signingConfigs.nguyenminhduc
     }
 
     buildTypes {
@@ -44,8 +49,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-}
 
 }
 dependencies {
@@ -70,6 +73,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.1.0'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
 
 
 }

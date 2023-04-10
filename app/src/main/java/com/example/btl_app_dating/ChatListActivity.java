@@ -1,10 +1,13 @@
 package com.example.btl_app_dating;
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RelativeLayout;
+
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,7 @@ import java.util.List;
 
 public class ChatListActivity extends AppCompatActivity {
 
+
     private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
     private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
     private RecyclerView rcv_conv;
@@ -32,10 +36,12 @@ public class ChatListActivity extends AppCompatActivity {
     private List<conversation> list_conv = new ArrayList<>();
     private String uid;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatlist);
+
 
         uid = getIntent().getStringExtra("key_userId");
 
