@@ -11,30 +11,27 @@
         android:padding="10dp"
         android:id="@+id/linear_ll"
         android:orientation="horizontal">
-        
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_back"
-            android:layout_alignParentLeft="true"/>
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Account Settings"
-            android:textSize="16dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+
 
         <TextView
+            android:layout_width="177dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Profile "
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
             android:textColor="#FF3A5C"
             android:layout_alignParentRight="true"
             android:textStyle="normal"
-            android:textSize="15dp"/>
+            android:textSize="25sp"/>
     </LinearLayout>
 
     <View

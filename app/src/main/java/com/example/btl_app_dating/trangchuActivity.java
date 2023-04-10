@@ -88,7 +88,12 @@ public class trangchuActivity extends AppCompatActivity {
         btn_prf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("debug: ",String.valueOf(ischat));
+                Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+                intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                finish();
+
             }
         });
 
@@ -108,6 +113,7 @@ public class trangchuActivity extends AppCompatActivity {
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View view) {
+                if(list_viewpage.isEmpty()) return;
                 loadconv();
                 useridtopcard = list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
                 checkischat(uid,useridtopcard);

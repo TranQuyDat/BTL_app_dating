@@ -131,14 +131,16 @@ public class chatActivity extends AppCompatActivity {
         String mes = input_text.getText().toString();
         if (mes.isEmpty()) return;
         ChatMessage chat = new ChatMessage(uid,avtid,name_Sender,mes,time.toString());
-        String id_mes = String.valueOf(id);
-        db_messenger.child(keyconv).child("mes_"+id_mes).setValue(chat);
+        db_messenger.child(keyconv).child("mes_"+padNumber((int) id,3)).setValue(chat);
         list_chatobj.add(chat);
         adapter.notifyItemChanged(list_chatobj.size()-1);
         input_text.getText().clear();
         rcv_chatbox.smoothScrollToPosition(adapter.getItemCount());
     }
-
+    String padNumber(int number, int padding) {
+        String format = "%0" + padding + "d";
+        return String.format(format, number);
+    }
     private void getdata_firebase(String conv){
         autoid();
         db_messenger.child(conv).addValueEventListener(new ValueEventListener() {
@@ -169,7 +171,6 @@ public class chatActivity extends AppCompatActivity {
                 if (snapshot.getChildrenCount()!=0){
                     id = snapshot.getChildrenCount();
                 }
-
             }
 
             @Override
