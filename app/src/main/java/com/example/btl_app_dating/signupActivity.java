@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,8 @@ public class signupActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
+            Log.d("uid: ",currentUser.getUid());
+
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -63,6 +66,7 @@ public class signupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 finish();
             }
         });
@@ -109,8 +113,12 @@ public class signupActivity extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     Toast.makeText(signupActivity.this, "Account created success",
                                             Toast.LENGTH_SHORT).show();
+                                    String uid = task.getResult().getUser().getUid();
+                                    User user = new User(2131165305, username,0,"","","","" );
+                                    update_users(user, uid);
                                     Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -135,5 +143,15 @@ public class signupActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
+
+    private void update_users(User user, String uid ){
+
+        db_user.child(uid).setValue(user);
+        db_user.child(uid).child("img_view").setValue("");
+    }
+
 }

@@ -18,39 +18,43 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     private List<ChatMessage> messages;
 
-    private  int mes_right=1;
-    private int mes_left=0;
-    public ChatAdapter(List<ChatMessage> messages) {
+    private int mes_right = 1;
+    private int mes_left = 0;
+
+    private String uid;
+
+    public ChatAdapter(List<ChatMessage> messages, String uid) {
+
         this.messages = messages;
+        this.uid = uid;
     }
 
     @NonNull
     @Override
     public chat_viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int item_mes =0;
-        if(viewType == mes_left){
+        int item_mes = 0;
+        if (viewType == mes_left) {
             item_mes = R.layout.item_chat_mes_friend;
-        }
-        else{
+        } else {
             item_mes = R.layout.item_chat_mes_you;
         }
-        View view = LayoutInflater.from(parent.getContext()).inflate( item_mes,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(item_mes, parent, false);
         return new chat_viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull chat_viewholder holder, int position) {
         ChatMessage mes = messages.get(position);
-        if(mes ==null) return;
+        if (mes == null) return;
         holder.txt_mes.setText(mes.getMestxt());
         holder.sender.setText(mes.getSender());
-        holder.time.setText(mes.getTime().toString());
+        holder.time.setText(mes.getTime());
         holder.avt_mes_View.setImageResource(mes.getAvt_mes_Id());
     }
 
     @Override
     public int getItemCount() {
-        if(messages !=null){
+        if (messages != null) {
             return messages.size();
         }
         return 0;
@@ -62,10 +66,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
         private TextView time;
 
         private ImageView avt_mes_View;
+
         public chat_viewholder(@NonNull View itemView) {
             super(itemView);
             sender = itemView.findViewById(R.id.sender);
-            txt_mes =itemView.findViewById(R.id.txt_mes_view);
+            txt_mes = itemView.findViewById(R.id.txt_mes_view);
             time = itemView.findViewById(R.id.time_mes);
             avt_mes_View = itemView.findViewById(R.id.avt_mes);
         }
@@ -75,11 +80,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
 
     @Override
     public int getItemViewType(int position) {
-        if(messages.get(position).getSender_id().equalsIgnoreCase("senderId1")){
+        if (messages != null && messages.get(position) != null && messages.get(position).getSender_id() != null && messages.get(position).getSender_id().equalsIgnoreCase(uid)) {
             return mes_right;
-        }
-        else{
-            return  mes_left;
+        } else {
+            return mes_left;
         }
     }
+
 }

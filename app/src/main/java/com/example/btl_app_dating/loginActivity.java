@@ -36,7 +36,9 @@ public class loginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             Intent intent = new Intent(getApplicationContext(), trangchuActivity.class);
+            intent.putExtra("key_userId",String.valueOf(currentUser.getUid()));
             startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             finish();
         }
     }
@@ -57,6 +59,7 @@ public class loginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), signupActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 finish();
             }
         });
@@ -84,9 +87,12 @@ public class loginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(view.GONE);
                                 if (task.isSuccessful()) {
+                                    Log.d("debug:",String.valueOf(task.getResult().getUser().getUid()));
                                     Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), trangchuActivity.class);
+                                    intent.putExtra("key_userId",String.valueOf(task.getResult().getUser().getUid()));
                                     startActivity(intent);
+                                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                                     finish();
                                 } else {
                                     Toast.makeText(loginActivity.this, "Authentication failed.",

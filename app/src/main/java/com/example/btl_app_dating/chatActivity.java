@@ -2,10 +2,13 @@ package com.example.btl_app_dating;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
@@ -43,27 +46,46 @@ public class chatActivity extends AppCompatActivity {
     private Button sendButton;
 
     private DatabaseReference db_messenger = FirebaseDatabase.getInstance().getReference("mess");
-    private Timestamp time = new Timestamp(System.currentTimeMillis());
+    private DatabaseReference db_user = FirebaseDatabase.getInstance().getReference("users");
+    private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
+
+    public Timestamp time = new Timestamp(System.currentTimeMillis());
     private List<ChatMessage> list_chatobj = new ArrayList<>();
     private ChatAdapter adapter;
     private long id =0;
+
+    private String keyconv="";
+
+
+    private int avtid;
+
+
+
+    private String name_Sender="";
+
+    private String uid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbox);
+        uid = getIntent().getStringExtra("key_userId");
+        keyconv = getIntent().getStringExtra("Key_conv") ;
+        get_name_avt();
         rcv_chatbox = findViewById(R.id.RecycleView_mes);
         LinearLayoutManager lnm = new LinearLayoutManager(this);
         rcv_chatbox.setLayoutManager(lnm);
         sendButton = findViewById(R.id.btn_send);
         EditText inputtxt = findViewById(R.id.txt_mes_input);
-        adapter = new ChatAdapter(list_chatobj);
+        adapter = new ChatAdapter(list_chatobj,uid);
         rcv_chatbox.setAdapter(adapter);
-        if(list_chatobj.size()<=0)
-            getdata_firebase();
+
+            getdata_firebase(keyconv);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("debug!!!!!!!!!!!: ",keyconv);
+                autoid();
                 update_chat(inputtxt);
             }
         });
@@ -76,6 +98,16 @@ public class chatActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),ChatListActivity.class);
+        intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        finish();
+    }
+
     private void checkkeyboard(){
         final View actvityrootview = findViewById(R.id.lable_mes);
         actvityrootview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -95,20 +127,21 @@ public class chatActivity extends AppCompatActivity {
     }
 
     private void update_chat(EditText input_text){
+        autoid();
         String mes = input_text.getText().toString();
         if (mes.isEmpty()) return;
-        ChatMessage chat = new ChatMessage("senderId1",R.drawable.avatar1,"me",mes,time.toString());
+        ChatMessage chat = new ChatMessage(uid,avtid,name_Sender,mes,time.toString());
         String id_mes = String.valueOf(id);
-        db_messenger.child("conv_0").child("mes_"+id_mes).setValue(chat);
+        db_messenger.child(keyconv).child("mes_"+id_mes).setValue(chat);
         list_chatobj.add(chat);
         adapter.notifyItemChanged(list_chatobj.size()-1);
         input_text.getText().clear();
         rcv_chatbox.smoothScrollToPosition(adapter.getItemCount());
     }
 
-    private void getdata_firebase(){
+    private void getdata_firebase(String conv){
         autoid();
-        db_messenger.child("conv_0").addValueEventListener(new ValueEventListener() {
+        db_messenger.child(conv).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list_chatobj.clear();
@@ -129,7 +162,7 @@ public class chatActivity extends AppCompatActivity {
     }
 
     private int autoid(){
-        db_messenger.child("conv_0").addValueEventListener(new ValueEventListener() {
+        db_messenger.child(keyconv).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -146,4 +179,26 @@ public class chatActivity extends AppCompatActivity {
         });
         return (int) id;
     }
+
+
+
+
+
+    private void get_name_avt(){
+        db_user.child(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               User user = snapshot.getValue(User.class);
+               name_Sender = user.getname();
+               avtid = user.getresourceID();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
