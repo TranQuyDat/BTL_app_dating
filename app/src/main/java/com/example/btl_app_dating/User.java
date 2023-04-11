@@ -1,7 +1,9 @@
 package com.example.btl_app_dating;
 
+import android.net.Uri;
+
 public class User {
-    private int resourceID;
+    private String img_uri;
     private String name;
     private  int age;
     private String birth;
@@ -14,13 +16,14 @@ public class User {
     public User() {
     }
 
-    public User(int resourceID, String name){
-        this.resourceID=resourceID;
+    public User(String img_uri, String name){
+        this.img_uri=img_uri;
         this.name=name;
     }
 
-    public User(int resourceID, String name, int age, String birth, String relationship, String word, String gender) {
-        this.resourceID = resourceID;
+
+    public User(String img_uri, String name, int age, String birth, String relationship, String word, String gender) {
+        this.img_uri = img_uri;
         this.name = name;
         this.age = age;
         this.birth = birth;
@@ -29,12 +32,12 @@ public class User {
         this.gender = gender;
     }
 
-    public int getresourceID() {
-        return resourceID;
+    public String getimg_uri() {
+        return img_uri;
     }
 
-    public void setResourceID(int resourceID) {
-        this.resourceID = resourceID;
+    public void setimg_uri(String img_uri) {
+        this.img_uri = img_uri;
     }
 
     public String getname() {

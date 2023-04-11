@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,13 +48,13 @@ public class ConvAdapter extends RecyclerView.Adapter<ConvAdapter.UserViewHolder
             return;
         }
 
-
+        Picasso picasso =Picasso.get();
         if(uid.equalsIgnoreCase(conv.getuserid1())) {
-            holder.imgUser.setImageResource(conv.getimg_user2());
+            picasso.load(Uri.parse(conv.getimg_user2())).error(R.drawable.avatar1).into(holder.imgUser);
             holder.tvName.setText(conv.getname_user2());
         }
         else  {
-            holder.imgUser.setImageResource(conv.getimg_user1());
+            picasso.load(Uri.parse(conv.getimg_user1())).error(R.drawable.avatar1).into(holder.imgUser);
             holder.tvName.setText(conv.getname_user1());
         }
         holder.tvlasmes.setText(conv.getlast_message());

@@ -1,16 +1,18 @@
 package com.example.btl_app_dating;
 
+import android.net.Uri;
+
 public class ChatMessage {
     private String sender;
     private String mestxt;
     private String time;
     private String sender_id;
-    private int avt_mes_Id;
+    private String avt_mes_Id;
 
     public ChatMessage() {
     }
 
-    public ChatMessage(String sender_id,int avt_mes_Id , String sender, String mestxt, String time){
+    public ChatMessage(String sender_id, String avt_mes_Id , String sender, String mestxt, String time){
         this.sender_id =sender_id;
         this.sender=sender;
         this.mestxt=mestxt;
@@ -28,7 +30,7 @@ public class ChatMessage {
         return time;
     }
 
-    public int getAvt_mes_Id() {
+    public String getAvt_mes_Id() {
         return avt_mes_Id;
     }
 
@@ -40,7 +42,7 @@ public class ChatMessage {
         this.sender_id = sender_id;
     }
 
-    public void setAvt_mes_Id(int avt_mes_Id) {
+    public void setAvt_mes_Id(String avt_mes_Id) {
         this.avt_mes_Id = avt_mes_Id;
     }
 

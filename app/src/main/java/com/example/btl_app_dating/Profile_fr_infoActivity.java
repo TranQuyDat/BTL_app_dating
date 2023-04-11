@@ -4,18 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,63 +18,22 @@ import com.google.firebase.database.ValueEventListener;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+public class Profile_fr_infoActivity extends AppCompatActivity {
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class ProfileActivity extends AppCompatActivity {
-
-
+    private String uidtopcard ;
     private DatabaseReference db_user = FirebaseDatabase.getInstance().getReference("users");
-    FirebaseAuth auth;
-    private String uid ;
-    FirebaseUser user;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile);
-        uid = getIntent().getStringExtra("key_userId");
+        setContentView(R.layout.profile_friend);
+
+        uidtopcard = getIntent().getStringExtra("key_userIdtopcard");
 
         setdataprf();
-        auth = FirebaseAuth.getInstance();
-        TextView btnedit= findViewById(R.id.btn_edit_prf);
-        TextView btn_logout =findViewById(R.id.btn_logout);
-        TextView txt_email = findViewById(R.id.email_prf);
-        user = auth.getCurrentUser();
-        if(user == null){
-            Intent intent = new Intent(getApplicationContext(), loginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            txt_email.setText(user.getEmail());
-        }
-
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), loginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        btnedit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Profile_editActivity.class);
-                intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-                finish();
-            }
-        });
-
-
     }
 
     private void setdataprf(){
-        db_user.child(uid).addValueEventListener(new ValueEventListener() {
+        db_user.child(uidtopcard).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 CircularImageView avt = findViewById(R.id.avt_prf);
@@ -114,7 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

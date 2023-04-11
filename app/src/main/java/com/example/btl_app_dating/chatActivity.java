@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.style.UpdateLayout;
 import android.util.Log;
@@ -57,7 +58,7 @@ public class chatActivity extends AppCompatActivity {
     private String keyconv="";
 
 
-    private int avtid;
+    private String avtid;
 
 
 
@@ -191,7 +192,7 @@ public class chatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                User user = snapshot.getValue(User.class);
                name_Sender = user.getname();
-               avtid = user.getresourceID();
+               avtid = user.getimg_uri();
 
             }
 
