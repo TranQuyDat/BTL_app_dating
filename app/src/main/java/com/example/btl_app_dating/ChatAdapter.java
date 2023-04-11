@@ -1,6 +1,7 @@
 package com.example.btl_app_dating;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,7 +52,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.chat_viewholde
         holder.txt_mes.setText(mes.getMestxt());
         holder.sender.setText(mes.getSender());
         holder.time.setText(mes.getTime());
-        holder.avt_mes_View.setImageResource(mes.getAvt_mes_Id());
+        Picasso picasso = Picasso.get();
+        picasso.load(Uri.parse(mes.getAvt_mes_Id())).error(R.drawable.avatar1).into(holder.avt_mes_View);
     }
 
     @Override

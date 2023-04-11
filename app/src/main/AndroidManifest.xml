@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BTL_app_dating"
         tools:targetApi="31">
-
+        <!--login-->
         <activity
             android:name=".loginActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--signup-->
         <activity
             android:name=".signupActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -36,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--trangchu-->
         <activity
             android:name=".trangchuActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -48,7 +50,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!--chatlist-->
         <activity
             android:name=".ChatListActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -60,9 +62,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!--chatbox-->
         <activity
             android:name=".chatActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--profile-->
+        <activity
+            android:name=".ProfileActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--profileEdit-->
+        <activity
+            android:name=".Profile_editActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--profile_friend-->
+        <activity
+            android:name=".Profile_fr_infoActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
 

@@ -18,20 +18,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="Profile "
+            android:text="Info"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:textColor="#FF3A5C"
-            android:layout_alignParentRight="true"
-            android:textStyle="normal"
-            android:textSize="25sp"/>
+
     </LinearLayout>
 
     <View

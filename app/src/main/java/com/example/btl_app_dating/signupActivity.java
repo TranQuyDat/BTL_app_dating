@@ -4,6 +4,7 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -114,7 +115,8 @@ public class signupActivity extends AppCompatActivity {
                                     Toast.makeText(signupActivity.this, "Account created success",
                                             Toast.LENGTH_SHORT).show();
                                     String uid = task.getResult().getUser().getUid();
-                                    User user = new User(2131165305, username,0,"","","","" );
+                                    User user = new User("https://firebasestorage.googleapis.com/v0/b/btlappdating.appspot.com/o/avatar1.webp?alt=media&token=c7c52246-8602-4a67-89d6-00cab564519f",
+                                            username,0,"","","","" );
                                     update_users(user, uid);
                                     Intent intent = new Intent(getApplicationContext(), loginActivity.class);
                                     startActivity(intent);

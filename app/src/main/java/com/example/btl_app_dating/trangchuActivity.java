@@ -1,5 +1,7 @@
 package com.example.btl_app_dating;
 
+import static com.example.btl_app_dating.R.*;
+
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.DialogInterface;
@@ -31,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackView;
 
@@ -42,7 +46,9 @@ import java.util.List;
 
 public class trangchuActivity extends AppCompatActivity {
 
-    private FirebaseStorage storage  = FirebaseStorage.getInstance("gs://btlappdating.appspot.com");
+    private StorageReference storage_avt  = FirebaseStorage.getInstance().getReference("avt_img");
+
+    private StorageReference storage_view  = FirebaseStorage.getInstance().getReference("view_img");
     private DatabaseReference db_user = FirebaseDatabase.getInstance().getReference("users");
 
     private DatabaseReference db_conv = FirebaseDatabase.getInstance().getReference("conversations");
@@ -62,19 +68,20 @@ public class trangchuActivity extends AppCompatActivity {
 
     private String nameuid="";
 
-    private int avt_uid;
+    private String avt_uid;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.trangchu);
+        setContentView(layout.trangchu);
         uid = getIntent().getStringExtra("key_userId");
         get_name_img_uid();
 
         CardStackView card_view = findViewById(R.id.card_viewpage_main);
-        adapter = new viewpageAdapter(list_viewpage);
+
         CardStackLayoutManager cardStackLayoutManager = new CardStackLayoutManager(this);
         cardStackLayoutManager.setCanScrollVertical(false);
         card_view.setLayoutManager(cardStackLayoutManager);
+        adapter = new viewpageAdapter(list_viewpage,cardStackLayoutManager.getTopPosition(),this,getIntent().getStringExtra("key_userId"));
         card_view.setAdapter(adapter);
         loadconv();
         if (list_viewpage.size()<=0)
@@ -84,11 +91,18 @@ public class trangchuActivity extends AppCompatActivity {
         ImageButton btn_heart = findViewById(R.id.btn_heart);
         ImageButton btn_prf = findViewById(R.id.btn_prf);
 
+
 //btn_prf
         btn_prf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("debug: ",String.valueOf(ischat));
+                useridtopcard = list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
+                Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+                intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
+                startActivity(intent);
+                overridePendingTransition(anim.fade_in, anim.fade_out);
+                finish();
+
             }
         });
 
@@ -99,7 +113,7 @@ public class trangchuActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),ChatListActivity.class);
                 intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
                 startActivity(intent);
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                overridePendingTransition(anim.fade_in, anim.fade_out);
                 finish();
             }
         });
@@ -108,6 +122,7 @@ public class trangchuActivity extends AppCompatActivity {
             @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View view) {
+                if(list_viewpage.isEmpty()) return;
                 loadconv();
                 useridtopcard = list_viewpage.get(cardStackLayoutManager.getTopPosition()).getidu();
                 checkischat(uid,useridtopcard);
@@ -143,7 +158,7 @@ public class trangchuActivity extends AppCompatActivity {
             intent.putExtra("key_userId",getIntent().getStringExtra("key_userId"));
             intent.putExtra("Key_conv",new_conv);
             startActivity(intent);
-            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            overridePendingTransition(anim.fade_in, anim.fade_out);
             finish();
         }
     }
@@ -158,6 +173,8 @@ public class trangchuActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     Viewpage viewpage = dataSnapshot.getValue(Viewpage.class);
                     viewpage.setIdu(dataSnapshot.getKey());
+                    viewpage.getimg_view();
+                    Log.d("debug!!!!!!!!",viewpage.getimg_uri());
                     if(!uid.equalsIgnoreCase(viewpage.getidu()))
                         list_viewpage.add(viewpage);
                 }
@@ -176,7 +193,7 @@ public class trangchuActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 nameuid = user.getname();
-                avt_uid = user.getresourceID();
+                avt_uid = user.getimg_uri();
             }
 
             @Override
@@ -193,7 +210,7 @@ public class trangchuActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
                 String  name_uidtopcard = user.getname();
-                int avt_uidtopcard = user.getresourceID();
+                String avt_uidtopcard = user.getimg_uri();
                 conversation conversation = new conversation(lasttime,lastmes,name_uidtopcard,nameuid,useridtopcard,uid);
                 conversation.setImg_user1(avt_uidtopcard);
                 conversation.setImg_user2(avt_uid);
@@ -254,7 +271,7 @@ public class trangchuActivity extends AppCompatActivity {
                     intent.putExtra("Key_conv", con.getKey_conv());
                     intent.putExtra("key_userId", getIntent().getStringExtra("key_userId"));
                     startActivity(intent);
-                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                    overridePendingTransition(anim.fade_in, anim.fade_out);
                     finish();
                     return;
                 }

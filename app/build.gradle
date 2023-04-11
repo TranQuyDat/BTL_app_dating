@@ -36,7 +36,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.nguyenminhduc
+        signingConfig signingConfigs.tranquydat
     }
 
     buildTypes {
@@ -59,6 +59,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-firestore:24.4.5'
     implementation 'com.google.firebase:firebase-auth:21.2.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -72,7 +73,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.squareup.picasso:picasso:2.8'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.mikhaellopez:circularimageview:4.3.1'
 
 

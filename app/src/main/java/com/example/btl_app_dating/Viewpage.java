@@ -16,9 +16,9 @@ public class Viewpage extends User {
         this.img_view =img_view;
     }
 
-    public Viewpage(int avt_img, String name, int age, String birth, String relationship, String word, String gender,String img_view )
+    public Viewpage(Uri avt_img, String name, int age, String birth, String relationship, String word, String gender,String img_view )
     {
-        super(avt_img, name, age, birth, relationship, word, gender);
+        super(String.valueOf(avt_img), name, age, birth, relationship, word, gender);
         this.img_view =img_view;
     }
 
